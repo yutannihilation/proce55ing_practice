@@ -28,9 +28,9 @@ class ShrinkingTriangle extends MovingObject {
 
     noFill();
 
-    s1 = createShape(TRIANGLE, 0, sqrt(2) * size / 2, size / 2, 0, size, sqrt(2) * size / 2);
+    s1 = createShape(TRIANGLE, 0, size, sqrt(2) * size / 2, 0, sqrt(2) * size, size);
     s1.setStroke(color(255));
-    s1.setStrokeWeight(4);
+    s1.setStrokeWeight(ceil(size / 20));
   }
 
   void move() {
@@ -59,7 +59,7 @@ class ShrinkingTriangle extends MovingObject {
     scale(1 + bloat);
 
     // move back to the top-left corner of the shape
-    translate(-size / 2, -sqrt(2) * size / 4);
+    translate(-sqrt(2) * size / 2, -size / 2);
     shape(s1);
 
     popMatrix();

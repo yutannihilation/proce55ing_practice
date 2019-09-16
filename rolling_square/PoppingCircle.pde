@@ -8,7 +8,7 @@ class PoppingCircle extends MovingObject {
 
   // height and width of the circle
   float size;
-
+  
   // Current and initial offset
   float offset, initialOffset;
 
@@ -30,7 +30,7 @@ class PoppingCircle extends MovingObject {
 
     s1 = createShape(ELLIPSE, 0, 0, size, size);
     s1.setStroke(color(255));
-    s1.setStrokeWeight(4);
+    s1.setStrokeWeight(ceil(size / 20));
   }
 
   void move() {

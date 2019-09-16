@@ -34,12 +34,12 @@ class RollingSquare extends MovingObject {
     // outer square
     s1 = createShape(RECT, 0, 0, size, size);
     s1.setStroke(color(255));
-    s1.setStrokeWeight(4);
+    s1.setStrokeWeight(ceil(size / 20));
 
     // inner square
     s2 = createShape(RECT, 0, 0, size * innerSquareScale, size * innerSquareScale);
     s2.setStroke(color(255));
-    s2.setStrokeWeight(4);
+    s2.setStrokeWeight(ceil(size / 20));
   }
 
   void move() {
