@@ -1,25 +1,38 @@
-// A Star object
-RollingSquare s1, s2;
+int restAtBegin = 500;
+int restAtEnd = 500;
 
-// time after the move
-float extend = 1;
+color bgColor;
+
+MovingObject obj;
+
+// when the scene started in milliseconds
+int startTime = -1;
+
+void chooseBackgroundAndObject() {
+  startTime = -1;
+  bgColor = color(random(255), random(255), random(255));
+  obj = new RollingSquare(300, 300, 100, PI/8, 500);
+}
 
 void setup() {
   size(600, 600, P2D);
-
-  // Outer square
-  s1 = new RollingSquare(300, 300, 100, PI/8, 0.5);
-
-  // Inner square
-  s2 = new RollingSquare(300, 300, 50, -PI/8, 0.5);
+  chooseBackgroundAndObject();
 }
 
 void draw() {
-  background(51);
- 
-  s1.display();
-  s1.move();
-  
-  s2.display();
-  s2.move();
+  background(bgColor);
+  obj.display();
+
+  if (startTime < 0) {
+    startTime = millis();
+    delay(restAtBegin);
+    return;
+  }
+
+  obj.move();
+
+  if (obj.isFinished()) {
+    delay(restAtEnd);
+    chooseBackgroundAndObject();
+  }
 }

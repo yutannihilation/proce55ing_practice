@@ -1,24 +1,27 @@
-class RollingSquare {
+// ratio of inner square to outer square
+float innerSquareScale = 0.6;
+
+class RollingSquare extends MovingObject {
 
   // PShape object
-  PShape s;
+  PShape s1, s2;
 
   // location of the center of the shape
   float x, y;
 
   // length of each side
   float size;
-  
+
   // Current and initial rotation
   float angle, initialAngle;
-  
+
   // when the object is created in milliseconds
   float startTime = -1;
-  
-  // duration time until the rotation finishes
-  float duration;
-  
-  RollingSquare(float _x, float _y, float _size, float _angle, float _duration) {
+
+  // duration time until the rotation finishes in milliseconds
+  int duration;
+
+  RollingSquare(float _x, float _y, float _size, float _angle, int _duration) {
     x = _x;
     y = _y;
     size = _size;
@@ -27,9 +30,16 @@ class RollingSquare {
     duration = _duration;
 
     noFill();
-    s = createShape(RECT, 0, 0, size, size);
-    s.setStroke(color(255));
-    s.setStrokeWeight(4);
+
+    // outer square
+    s1 = createShape(RECT, 0, 0, size, size);
+    s1.setStroke(color(255));
+    s1.setStrokeWeight(4);
+
+    // inner square
+    s2 = createShape(RECT, 0, 0, size * innerSquareScale, size * innerSquareScale);
+    s2.setStroke(color(255));
+    s2.setStrokeWeight(4);
   }
 
   void move() {
@@ -39,15 +49,15 @@ class RollingSquare {
       angle = 0;
     } else {
       // cubic
-      // angle = initialAngle * (1 - pow((millis() - startTime) / duration / 1000, 3));
-      
+      // angle = initialAngle * (1 - pow((millis() - startTime) / duration, 3));
+
       // exponential
-      angle = initialAngle * pow(2, -10 * (millis() - startTime) / duration / 1000);
+      angle = initialAngle * pow(2, -10 * (millis() - startTime) / duration);
     }
   }
-  
+
   boolean isFinished() {
-    return millis() - startTime >= duration * 1000;
+    return millis() - startTime >= duration;
   }
 
   void display() {
@@ -59,7 +69,16 @@ class RollingSquare {
 
     // move back to the top-left corner of the shape
     translate(-size/2, -size/2);
-    shape(s);
+    shape(s1);
+
+    // go back to the center and rotate to the opposite direction
+    translate(size/2, size/2);
+    rotate(-2 * angle);
+
+    // draw smaller square
+    translate(-size * innerSquareScale/2, -size*innerSquareScale/2);
+    shape(s2);
+
     popMatrix();
   }
 }
