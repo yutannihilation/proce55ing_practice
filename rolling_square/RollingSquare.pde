@@ -20,7 +20,7 @@ class RollingSquare extends MovingObject {
 
   RollingSquare(float _size, float _angle, int _duration) {
     size = _size;
-    initialAngle = _angle * PI / 4;
+    initialAngle = _angle * PI / 2;
     angle = initialAngle;
     duration = _duration;
 

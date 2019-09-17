@@ -9,8 +9,8 @@ class ShrinkingTriangle extends MovingObject {
   // Current and initial bloat
   float bloat, initialBloat;
   
-  // center of gravity and the vector to the top corner
-  PVector center, v1;
+  // the vector to the top corner
+  PVector v1;
 
   // when the object is created in milliseconds
   float startTime = -1;
@@ -24,8 +24,7 @@ class ShrinkingTriangle extends MovingObject {
     bloat = initialBloat;
     duration = _duration;
 
-    center = new PVector(size / 2, size / sqrt(3));
-    v1 = new PVector(0, -center.y);
+    v1 = new PVector(0, -size / sqrt(3));
     // left corner
     v1.rotate(-2 * PI / 3);
 
@@ -34,9 +33,10 @@ class ShrinkingTriangle extends MovingObject {
     //s1 = createShape(TRIANGLE, -center.x, center.y / 2, 0, -center.y, center.x, center.y / 2);
     s1 = createShape();
     s1.beginShape();
-    s1.vertex(-center.x, center.y / 2);
-    s1.vertex(0, -center.y);
-    s1.vertex(center.x, center.y / 2);
+    // add dummy corners
+    s1.vertex(0, 0);
+    s1.vertex(0, 0);
+    s1.vertex(0, 0);
     s1.endShape(CLOSE);
     
     s1.setStroke(color(255));
@@ -65,14 +65,18 @@ class ShrinkingTriangle extends MovingObject {
     pushMatrix();
 
     PVector v = PVector.mult(v1, 1 + bloat);
+    
     s1.setVertex(0, v);
+    
     v.rotate(2 * PI / 3);
     s1.setVertex(1, v);
+    float y_adjust = v.y / 6;
+    
     v.rotate(2 * PI / 3);
     s1.setVertex(2, v);
     
     //rotate at the center of the shape
-    translate(width / 2, height / 2);
+    translate(width / 2, height / 2 - y_adjust);
     
     shape(s1);
 

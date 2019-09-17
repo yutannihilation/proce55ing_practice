@@ -1,9 +1,9 @@
 int restAtBegin = 50;
-int movingDuration = 300;
-int restAtEnd = 100;
+int movingDuration = 200;
+int restAtEnd = 50;
 
-int baseSize = 200;
-float baseOffsetFactor = 0.3;
+int baseSize = 300;
+float baseOffsetFactor = 0.15;
 
 color bgColor;
 
