@@ -6,9 +6,6 @@ class RollingSquare extends MovingObject {
   // PShape object
   PShape s1, s2;
 
-  // location of the center of the shape
-  float x, y;
-
   // length of each side
   float size;
 
@@ -21,12 +18,10 @@ class RollingSquare extends MovingObject {
   // duration time until the rotation finishes in milliseconds
   int duration;
 
-  RollingSquare(float _x, float _y, float _size, float _angle, int _duration) {
-    x = _x;
-    y = _y;
+  RollingSquare(float _size, float _angle, int _duration) {
     size = _size;
-    angle = _angle;
-    initialAngle = _angle;
+    initialAngle = _angle * PI / 4;
+    angle = initialAngle;
     duration = _duration;
 
     noFill();
@@ -34,12 +29,12 @@ class RollingSquare extends MovingObject {
     // outer square
     s1 = createShape(RECT, 0, 0, size, size);
     s1.setStroke(color(255));
-    s1.setStrokeWeight(ceil(size / 20));
+    s1.setStrokeWeight(ceil(_size / 20));
 
     // inner square
     s2 = createShape(RECT, 0, 0, size * innerSquareScale, size * innerSquareScale);
     s2.setStroke(color(255));
-    s2.setStrokeWeight(ceil(size / 20));
+    s2.setStrokeWeight(ceil(_size / 20));
   }
 
   void move() {
@@ -64,7 +59,7 @@ class RollingSquare extends MovingObject {
     pushMatrix();
 
     //rotate at the center of the shape
-    translate(x, y);
+    translate(width / 2, height / 2);
     rotate(angle);
 
     // move back to the top-left corner of the shape

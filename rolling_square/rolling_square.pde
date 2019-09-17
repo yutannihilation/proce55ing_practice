@@ -2,7 +2,8 @@ int restAtBegin = 50;
 int movingDuration = 300;
 int restAtEnd = 100;
 
-int baseSize = 150;
+int baseSize = 200;
+float baseOffsetFactor = 0.3;
 
 color bgColor;
 
@@ -20,20 +21,20 @@ void chooseBackgroundAndObject() {
   switch(ceil(random(6))) {
   case 0:
   case 1:
-    obj = new RollingSquare(300, 300, baseSize, PI/8, movingDuration);
+    obj = new RollingSquare(baseSize, baseOffsetFactor, movingDuration);
     break;
   case 2:
-    obj = new RollingSquare(300, 300, baseSize, -PI/8, movingDuration);
+    obj = new RollingSquare(baseSize, -baseOffsetFactor, movingDuration);
     break;
   case 3:
   case 4:
-    obj = new ShrinkingTriangle(300, 300, baseSize, 0.1, movingDuration);
+    obj = new ShrinkingTriangle(baseSize, baseOffsetFactor, movingDuration);
     break;
   case 5:
-    obj = new PoppingCircle(300, 300, baseSize, 20, movingDuration);
+    obj = new PoppingCircle(baseSize, baseOffsetFactor, movingDuration);
     break;
   case 6:
-    obj = new PoppingCircle(300, 300, baseSize, -20, movingDuration);
+    obj = new PoppingCircle(baseSize, -baseOffsetFactor, movingDuration);
     break;
   }
 }
