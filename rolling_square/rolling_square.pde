@@ -41,7 +41,7 @@ void chooseBackgroundAndObject() {
 
 void setup() {
   size(600, 600, P2D);
-  // blur = loadShader("blur.glsl"); 
+  blur = loadShader("blur.glsl"); 
 
   chooseBackgroundAndObject();
 }
@@ -59,8 +59,8 @@ void draw() {
   obj.move();
   
   // blur twice
-  // filter(blur);
-  // filter(blur);
+  filter(blur);
+  filter(blur);
 
   if (obj.isFinished()) {
     delay(restAtEnd);
