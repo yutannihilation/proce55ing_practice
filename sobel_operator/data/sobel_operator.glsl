@@ -1,3 +1,5 @@
+// The codes are from `EdgeDetection` in Processing sample projects
+
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;

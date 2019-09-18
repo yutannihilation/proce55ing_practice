@@ -1,3 +1,6 @@
+// The codes are from `BlurFilter` in Processing's examples
+// All I changed is the last line `vec4(sum.rgb, 1.0)` to `vec4(sum.rgba)` to respect the original alpha values
+
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -38,5 +41,5 @@ void main(void) {
   vec4 sum = (1.0 * col0 + 2.0 * col1 + 1.0 * col2 +  
               2.0 * col3 + 4.0 * col4 + 2.0 * col5 +
               1.0 * col6 + 2.0 * col7 + 1.0 * col8) / 16.0;
-  gl_FragColor = vec4(sum.rgb, 1.0) * vertColor;  
+  gl_FragColor = vec4(sum.rgba) * vertColor;  
 }
